@@ -1,12 +1,12 @@
-public class Board{
+public class QueenBoard{
     private int[][]board;
 
     public String name(){
 	return "Ostlund,William";
     }
     
-    public Board(int n){
-	board = new int[n][n];
+    public QueenBoard(int n){
+        board = new int[n][n];
     }
     
     public boolean solve(){
@@ -86,7 +86,7 @@ public class Board{
     }
 
     public static void main(String[]args){
-	Board k = new Board(Integer.parseInt(args[0]));
+	QueenBoard k = new QueenBoard(Integer.parseInt(args[0]));
 	if(true || k.solve()){
 	    System.out.println(k.solve());
 	    System.out.println();
