@@ -85,12 +85,14 @@ public class QueenBoard{
 	return s;
     }
 
+    public void printSolution(){
+	System.out.println();
+	System.out.println(this);
+    }
+
     public static void main(String[]args){
 	QueenBoard k = new QueenBoard(Integer.parseInt(args[0]));
-	if(true || k.solve()){
-	    System.out.println(k.solve());
-	    System.out.println();
-	    System.out.println(k);
-	}
+	k.solve();
+	k.printSolution();
     }
 }
