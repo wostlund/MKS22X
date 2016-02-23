@@ -117,10 +117,17 @@ public class KnightBoard{
     }
 
     public void printSolution(){
+	if (board[0][0] == 0){
+	    System.out.println("No valid solution");
+	    return;
+	}else if(board[0].length == 1 && board.length == 1){
+	    System.out.println(1);
+	    return; //b/c this is the only possibility in which all numbers are less than 10
+	}
 	for(int i = 0; i<board.length; i++){
 	    for(int d = 0; d<board[i].length; d++){
 		if(board[i][d]<10){
-		    System.out.print("" + board[i][d] + "  ");
+		    System.out.print("_" + board[i][d] + " ");
 		}else{
 		    System.out.print("" + board[i][d] + " ");
 		}
