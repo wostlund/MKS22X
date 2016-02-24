@@ -1,0 +1,37 @@
+import java.io.*;
+
+
+public class Bronze{
+
+    private int[][]field;
+    private int elevation;
+
+    public Bronze(int row, int col){
+	field = new int[row][col];
+    }
+    
+    public void stomp(int row, int col, int num){
+	int max = field[row][col];
+	for(int startR = row-1; startR < row + 2; startR++){
+	    for(int startC = col - 1; startC < col + 2; startC++){
+		if(field[startR][startC] > max){
+		    max = field[startR][startC];
+		}
+	    }
+	}
+	while (num > 0){
+	    for(int startR = row-1; startR < row + 2; startR++){
+		for(int startC = col - 1; startC < col + 2; startC++){
+		    if(field[startR][startC] == max){
+			field[startR][startC]--;
+		    }
+		}
+	    }
+	    max--;
+	    num--;
+	}
+    }
+
+    
+
+}
