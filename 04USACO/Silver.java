@@ -32,7 +32,7 @@ public class Silver{
 		    if(k!=grid[0].length-1 && grid[i][k+1] != -1){
 			a+=grid[i][k+1];
 		    }
-		    ans[i][k] += a;
+		    ans[i][k] = a;
 		}
 	    }
 	}
