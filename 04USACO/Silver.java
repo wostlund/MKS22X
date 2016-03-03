@@ -4,9 +4,40 @@ import java.util.Scanner;
 public class Silver{
 
     private int[][]grid;
+    private int endX;
+    private int endY;
+    private int turns;
+    
+    public Silver(String filename){
+	try{
+	    Scanner in = new Scanner(new File(filename));
+	    Scanner x = new Scanner(in.nextLine());
+	    int m = x.nextInt(), n = x.nextInt();
+	    turns = x.nextInt();
+	    int[][] ans = new int[m][n];
+	    for(int i = 0; i<m ; i++){
+		String j = new String(in.nextLine());
+		for(int k = 0; k<n; k++){
+		    if(j.charAt(k) == '.'){
+			ans[i][k] = 0;
+		    }else{
+			ans[i][k] = -1;
+		    }
+		}
+	    }
+	    Scanner v = new Scanner(in.nextLine());
+	    ans[v.nextInt()-1][v.nextInt()-1] = 1;
+	    grid = ans;
+	    endX = v.nextInt()-1;
+	    endY = v.nextInt()-1;
+	}catch(FileNotFoundException e){
+	    System.out.println("Sorry your file could not be found in this directory");
+	}
+    }
 
-    public Silver(int[][]k){
-	grid = k;
+    public void solve(){
+	makeAnsGrid(turns);
+	System.out.println(getAns(endX, endY) + ",7,Ostlund,William");
     }
 
     public int[][] makeAnsGrid(int numTimes){
@@ -45,30 +76,9 @@ public class Silver{
     }
 
     public static void main(String[]args){
-	try{
-	    Scanner in = new Scanner(new File("testCase2.txt"));
-	    Scanner x = new Scanner(in.nextLine());
-	    int m = x.nextInt(), n = x.nextInt();
-	    int turns = x.nextInt();
-	    int[][] ans = new int[m][n];
-	    for(int i = 0; i<m ; i++){
-		String j = new String(in.nextLine());
-		for(int k = 0; k<n; k++){
-		    if(j.charAt(k) == '.'){
-			ans[i][k] = 0;
-		    }else{
-			ans[i][k] = -1;
-		    }
-		}
-	    }
-	    Scanner v = new Scanner(in.nextLine());
-	    ans[v.nextInt()-1][v.nextInt()-1] = 1;
-	    Silver s = new Silver(ans);
-	    s.makeAnsGrid(turns);
-	    System.out.println(s.getAns(v.nextInt()-1, v.nextInt()-1));
-	}catch(FileNotFoundException e){
-	    System.out.println("Sorry your file could not be found in this directory");
-	}
+	Silver s = new Silver("testCase1.txt");
+	Silver m = new Silver("testCase2.txt");
+	s.solve();
+	m.solve();
     }
-    
 }
