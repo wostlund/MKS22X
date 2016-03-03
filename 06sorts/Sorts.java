@@ -101,8 +101,8 @@ public class Sorts{
 	int[] m = {2, 4, 1, 2, 4, 2, 12, 4, 3, 23, 43, 234, 43, 342, 1};
 	int[] l = {3, 2, 5, 2, 4, 32};
 	int[] k = {2, 4, 23, 54, 3, 4, 5, 6, 12, 45};
-	mergeSort(l);
-	showArray(l);
+	mergeSort(m);
+	showArray(m);
     }
 
     public static void showArray(int[] m){
