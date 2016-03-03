@@ -55,6 +55,7 @@ public class Sorts{
 	int p = 0;
 	for(int i = 0; i<holder.length; i+= k*2){
 	    if(i+(k*2) > holder.length && i+k < holder.length){
+		System.out.println();
 		interleave(holder, i, i+k, holder.length);
 	    }else if (i + (2*k) <= holder.length){		
 		interleave(holder, i, i+k, i+(2*k));
