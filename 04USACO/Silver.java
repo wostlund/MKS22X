@@ -76,9 +76,7 @@ public class Silver{
     }
 
     public static void main(String[]args){
-	Silver s = new Silver("testCase1.txt");
-	Silver m = new Silver("testCase2.txt");
+	Silver s = new Silver("ctravel.in");
 	s.solve();
-	m.solve();
     }
 }

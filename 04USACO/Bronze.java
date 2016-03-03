@@ -56,7 +56,7 @@ public class Bronze{
     public static void main(String[]args){
 
 	try{
-	    Scanner in = new Scanner(new File("makelake.txt"));
+	    Scanner in = new Scanner(new File("makelake.in"));
 	    Scanner f = new Scanner(in.nextLine());
 	    field = new int[f.nextInt()][f.nextInt()];
 	    int elevation = f.nextInt();
