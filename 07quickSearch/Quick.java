@@ -5,14 +5,14 @@ public class Quick{
     }
 
     public static int quickselect(int[]data, int start, int end, int place){
-	int u = (int)(Math.random()*(data.length - start - end)) + start;
+	int u = (int)(Math.random()*(end - start)) + start;
 	int j = partition(data, start, end, data[u]);
 	if (j == place){
 	    return data[j];
 	}else if(j > end - place){
-	    return quickselect(data, start, j, place);
+	    return quickselect(data, start, j, data[u]);
 	}
-	return quickselect(data, j+1, end, place);
+	return quickselect(data, j+1, end, data[u]);
     }
 
     public static int partition(int[]data, int start, int end, int num){
