@@ -42,7 +42,7 @@ public class Sorts{
 	}
     }
 
-    public static void mergeSort(int[]jeff){
+    public static void mergesort(int[]jeff){
 	int[]k = jeff;
 	mergeHelper(k, k.length, 1);
     }
@@ -101,7 +101,7 @@ public class Sorts{
 	int[] m = {2, 4, 1, 2, 4, 2, 12, 4, 3, 23, 43, 234, 43, 342, 1};
 	int[] l = {3, 2, 5, 2, 4, 32};
 	int[] k = {2, 4, 23, 54, 3, 4, 5, 6, 12, 45};
-	mergeSort(m);
+	mergesort(m);
 	showArray(m);
     }
 
