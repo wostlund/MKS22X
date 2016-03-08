@@ -48,7 +48,7 @@ public class Driver2{
 	    Sorts.selectionSort(ary);
 	}
 	if(choice.equals("merge")){
-	    Sorts.mergeSort(ary);
+	    Sorts.mergesort(ary);
 	}
 	long end = System.currentTimeMillis();
 

@@ -18,12 +18,12 @@ public class Driver1{
 	try{
 	    int[]ans = createArray(Integer.parseInt(args[0]));
 	    showArray(ans);
-	    Sorts.mergeSort(ans);
+	    Sorts.mergesort(ans);
 	    showArray(ans);
 	}catch(IndexOutOfBoundsException e){
 	    int[]ans = createArray(20);
 	    showArray(ans);
-	    Sorts.mergeSort(ans);
+	    Sorts.mergesort(ans);
 	    showArray(ans);
 	}
     }
