@@ -1,7 +1,7 @@
 public class Quick{
 
     public static int quickselect(int[]data, int place){
-	return quickselect(data, 0, data.length, place);
+	return quickselect(data, 0, data.length, place+1);
     }
 
     public static int quickselect(int[]data, int start, int end, int place){
@@ -57,6 +57,20 @@ public class Quick{
     
     public static void main(String[]args){
 	int[] k = {1, 2, 5, 3, 2, 455,56 ,2 ,4 ,2, 34, 21,3, 453 ,23};
+	System.out.println(quickselect(k, 0));
+	System.out.println(quickselect(k, 1));
+	System.out.println(quickselect(k, 2));
+	System.out.println(quickselect(k, 3));
+	System.out.println(quickselect(k, 4));
+	System.out.println(quickselect(k, 5));
+	System.out.println(quickselect(k, 6));
+	System.out.println(quickselect(k, 7));
+	System.out.println(quickselect(k, 8));
+	System.out.println(quickselect(k, 9));
+	System.out.println(quickselect(k, 10));
+	System.out.println(quickselect(k, 11));
+	System.out.println(quickselect(k, 12));
 	System.out.println(quickselect(k, 13));
+	System.out.println(quickselect(k, 14));
     }
 }
