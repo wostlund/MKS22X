@@ -1,5 +1,9 @@
 public class Quick{
 
+    public static String name(){
+	return "7,Ostlund,William";
+    }
+
     public static int quickselect(int[]data, int place){
 	return quickselect(data, 0, data.length, place+1);
     }
