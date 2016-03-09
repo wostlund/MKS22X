@@ -8,9 +8,9 @@ public class Quick{
 	//showArray(data);
 	int u = (int)(Math.random()*(end - start)) + start;
 	int[] j = partition(data, start, end);
-	if (j[0] == place - 1 || end - start == 1){
+	if (j[0] == place){
 	    return j[1];
-	}else if(j[0] > place - 1){
+	}else if(j[0] > place){
 	    return quickselect(data, start, j[0], place);
 	}
 	return quickselect(data, j[0], end, place);
