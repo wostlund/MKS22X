@@ -8,7 +8,7 @@ public class Quick{
 	return quickselect(data, 0, data.length, place+1);
     }
 
-    public static int quickselect(int[]data, int start, int end, int place){
+    public static int quickselect(int[]data, int place, int start, int end){
 	//showArray(data);
 	int u = (int)(Math.random()*(end - start)) + start;
 	int[] j = partition(data, start, end);
