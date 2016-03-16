@@ -1,5 +1,31 @@
 public class MyLinkedList{
 
+    private class LNode{
+	
+	private int value;
+	private LNode next;
+
+	public LNode getNext(){
+	    return this.next;
+	}
+
+	public int getValue(){
+	    return this.value;
+	}
+
+	public void setValue(int k){
+	    value = k;
+	}
+
+	public void setNext(LNode m){
+	    next = m;
+	}
+	
+	public LNode(int Value){
+	    value = Value;
+	}
+    }
+
     private LNode start;
     private int size;
 
@@ -70,12 +96,12 @@ public class MyLinkedList{
 
     public String toString(){
 	LNode chooser = this.start;
-	String ans = "";
+	String ans = "[ ";
 	while(chooser != null){
-	    ans += chooser.getValue() + " ";
+	    ans += chooser.getValue() + ", ";
 	    chooser = chooser.getNext();
 	}
-	return ans;
+	return ans.substring(0, ans.length() - 2)+ " ]";
     }
 
     public int remove(int index){
