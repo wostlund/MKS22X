@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyLinkedList<T>{
 
     private class LNode{
@@ -26,6 +28,35 @@ public class MyLinkedList<T>{
 	}
     }
 
+    public Iterator<T> iterator(){
+	return new X();
+    }
+
+    public class X implements Iterator<T>{
+	private LNode current;
+
+	public X(){
+	    current = start;
+	}
+
+	public boolean hasNext(){
+	    return current != null;
+	}
+
+	public T next(){
+	    if(!this.hasNext()){
+		throw new NoSuchElementException("Check for hasNext() next time, fool");
+	    }
+	    T ans = current.getValue();
+	    current = current.getNext();
+	    return ans;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+    }
+
     private LNode start;
     private int size;
 
@@ -45,6 +76,9 @@ public class MyLinkedList<T>{
 
 
     public T get(int index){
+	if(index < 0 || index > size - 1){
+	    throw new IndexOutOfBoundsException("Your index don't work too good");
+	}
 	LNode last = start;
 	for(int i = 0; i < index; i++){
 	    last = last.getNext();
@@ -53,6 +87,9 @@ public class MyLinkedList<T>{
     }
 
     public T set(int index, T newValue){
+	if(index < 0 || index > size - 1){
+	    throw new IndexOutOfBoundsException("Your index don't work too good");
+	}
 	LNode last = start;
 	for(int i = 0; i < index; i++){
 	    last = last.getNext();
@@ -63,6 +100,9 @@ public class MyLinkedList<T>{
     }
 
     public boolean add(int index, T newValue){
+	if(index < 0 || index > size){
+	    throw new IndexOutOfBoundsException("Your index don't work too good");
+	}
 	LNode a = new LNode(newValue);
 	if(index < 0 || index > size){
 	    return false;
@@ -110,8 +150,8 @@ public class MyLinkedList<T>{
     }
 
     public T remove(int index){
-	if (index < 0 || index >= size){
-	    return null;
+	if(index < 0 || index > size - 1){
+	     throw new IndexOutOfBoundsException("Your index don't work too good");
 	}
 	T s;
 	int k = 0;
@@ -122,18 +162,25 @@ public class MyLinkedList<T>{
 	    start = start.getNext();
 	    return m;
 	}
-	while(k!= index){
+	while(k != index){
 	    if(k == index - 1){
 		before = current;
 	    }
-	    current = current.getNext();
+	    if(k != index - 1){
+		current = current.getNext();
+	    }
 	    k++;
 	}
 	s = current.getValue();
-	before.setNext(current.getNext());
+	if(current.getNext() != null){
+	    before.setNext(current.getNext());
+	}else{
+	    before.setNext(null);
+	}
+	size --;
 	return s;
     }
-
+    
     public static void main(String[]args){
 	MyLinkedList<String> k = new MyLinkedList<String>();
 	k.add("I");
