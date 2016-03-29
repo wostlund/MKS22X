@@ -160,6 +160,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if(index == 0){
 	    T m = start.getValue();
 	    start = start.getNext();
+	    size--;
 	    return m;
 	}
 	while(k != index){

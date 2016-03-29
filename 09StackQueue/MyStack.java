@@ -19,7 +19,7 @@ public class MyStack<T>{
 	return data.remove(0);
     }
 
-    public T peep(){
+    public T peek(){
 	if(data.size() == 0){
 	    throw new NoSuchElementException();
 	}
