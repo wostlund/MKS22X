@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyQueue<T>{
     private MyLinkedList<T> data;
 
@@ -10,10 +12,16 @@ public class MyQueue<T>{
     }
 
     public T dequeue(){
+	if(data.size() == 0){
+	    throw new NoSuchElementException();
+	}
 	return data.remove(0);
     }
 
     public T peek(){
+	if(data.size() == 0){
+	    throw new NoSuchElementException();
+	}
 	return data.get(0);
     }
 

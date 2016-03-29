@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyStack<T>{
 
     private MyLinkedList<T> data;
@@ -11,10 +13,16 @@ public class MyStack<T>{
     }
 
     public T pop(){
+	if(data.size() == 0){
+	    throw new NoSuchElementException();
+	}
 	return data.remove(0);
     }
 
     public T peep(){
+	if(data.size() == 0){
+	    throw new NoSuchElementException();
+	}
 	return data.get(0);
     }
 
