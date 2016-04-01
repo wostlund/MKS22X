@@ -6,9 +6,18 @@ public class MyLinkedList<T> implements Iterable<T>{
 	
 	private T value;
 	private LNode next;
+	private LNode last;
 
 	public LNode getNext(){
 	    return this.next;
+	}
+
+	public LNode getLast(){
+	    return this.last;
+	}
+
+	public void setLast(LNode m){
+	    last = m;
 	}
 
 	public T getValue(){
@@ -57,7 +66,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	}
     }
 
-    private LNode start;
+    private LNode start, end;
     private int size;
 
     //public MyLinkedList(){
@@ -67,6 +76,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public MyLinkedList(){
 	start = null;
+	end = null;
 	size = 0;
     }
     
@@ -80,8 +90,15 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    throw new IndexOutOfBoundsException("Your index don't work too good");
 	}
 	LNode last = start;
-	for(int i = 0; i < index; i++){
-	    last = last.getNext();
+	if(index < size/2){
+	    for(int i = 0; i < index; i++){
+		last = last.getNext();
+	    }
+	}else{ 
+	    last = end;
+	    for(int i = size - 1; i > index - 1; i--){
+		last = last.getLast();
+	    }
 	}
 	return last.getValue();
     }
@@ -119,7 +136,11 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    k++;
 	}
 	a.setNext(last.getNext());
+	a.setLast(last);
 	last.setNext(a);
+	if(a.getNext()!=null){
+	    a.getNext().setLast(a);
+	}
 	this.size++;
 	return true;
     }
@@ -160,6 +181,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if(index == 0){
 	    T m = start.getValue();
 	    start = start.getNext();
+	    start.setLast(null);
 	    return m;
 	}
 	while(k != index){
@@ -174,6 +196,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	s = current.getValue();
 	if(current.getNext() != null){
 	    before.setNext(current.getNext());
+	    current.getNext().setLast(before);
 	}else{
 	    before.setNext(null);
 	}
