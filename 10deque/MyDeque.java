@@ -8,6 +8,10 @@ public class MyDeque<T>{
 	index = 0;
     }
 
+    public int size(){
+	return size;
+    }
+
     private void resize(){
 	T[] ans = (T[])new Object[data.length * 2];
 	int k = index;
@@ -24,6 +28,7 @@ public class MyDeque<T>{
    }
 
     public void addFirst(T value){
+	//System.out.println(size+":"+data.length+":"+index);
 	if(size == data.length){
 	    resize();
 	}
@@ -44,7 +49,7 @@ public class MyDeque<T>{
 	if(index == data.length){
 	    index = 0;
 	}
-	size++;
+	size--;
 	data[index] = value;
     }
 
