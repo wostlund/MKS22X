@@ -174,8 +174,18 @@ public class BetterMaze{
 		z.setAnimate(true);
 		z.clearTerminal();
 	    }
+	    if(args.length > 1){
+		if(args[1].equals("DFS")){
+		    z.solveDFS();
+		}else if(args[1].equals("BFS")){
+		    z.solveBFS();
+		}else{
+		    System.out.println("No such search available!");
+		    return;
+		}
+	    }
 	}
-	System.out.println(z.solveDFS());
+	z.solveDFS();
     }
      
    /**mutator for the animate variable  **/
