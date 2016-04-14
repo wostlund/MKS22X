@@ -34,6 +34,7 @@ public class BetterMaze{
 	}
     }
 
+    private boolean solved;
 
     private char[][] maze;
 
@@ -106,44 +107,52 @@ public class BetterMaze{
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
     **/
-    private boolean solve(){  
+    private boolean solve(){
+	solved = false;
 	places.add(new Node(startRow, startCol));
 	while (places.hasNext()){
 	    Node m = places.next();
 	    int row = m.row();
 	    int col = m.col();
-	    maze[row][col] = '.';
+	    if(m.getLast() != null){
+		maze[m.getLast().row()][m.getLast().col()] = '.';
+	    }
+	    maze[row][col] = 'x';
 	    if(animate){
 		System.out.println(this);
-		wait(60);
+		wait(40);
 	    }
 	    if(maze[row][col+1] == 'E'){
 		maze[row][col+1] = '@';
+		maze[startRow][startCol] = '@';
 		last = new Node(row, col+1);
 		last.setLast(m);
-		answerVis(last);
-		System.out.println(this);
+		Node k = last;
+		answerVis(k);
 		return true;
 	    }if(maze[row][col-1] == 'E'){
 		maze[row][col-1] = '@';
+		maze[startRow][startCol] = '@';
 		last = new Node(row, col-1);
 		last.setLast(m);
-		answerVis(last);
-		System.out.println(this);
+		Node k = last;
+		answerVis(k);
 		return true;
 	    }if(maze[row-1][col] == 'E'){
-		maze[row-1][col] = '@';
+		maze[startRow][startCol] = '@';
 		last = new Node(row-1, col);
 		last.setLast(m);
-		answerVis(last);
-		System.out.println(this);
+		Node k = last;
+		maze[row-1][col] = '@';
+		answerVis(k);
 		return true;
 	    }if(maze[row+1][col] == 'E'){
-		maze[row+1][col] = '@';
+		maze[startRow][startCol] = '@';
 		last = new Node(row+1, col);
 		last.setLast(m);
-		answerVis(last);
-		System.out.println(this);
+		Node k = last;
+		maze[row+1][col] = '@';
+		answerVis(k);
 		return true;
 	    }
 	    if(maze[row][col+1] == ' '){
@@ -163,6 +172,11 @@ public class BetterMaze{
 		l.setLast(m);
 		places.add(l);
 	    }
+
+	    if(maze[row][col+1] != ' ' && maze[row][col-1] != ' ' &&
+	       maze[row-1][col] != ' ' && maze[row+1][col] != ' '){
+		maze[row][col] = '.';
+	    }
 	}
 	return false;
     }
@@ -176,16 +190,15 @@ public class BetterMaze{
 	    }
 	    if(args.length > 1){
 		if(args[1].equals("DFS")){
-		    z.solveDFS();
+		    System.out.println(z.solveDFS());
 		}else if(args[1].equals("BFS")){
-		    z.solveBFS();
+		    System.out.println(z.solveBFS());
 		}else{
 		    System.out.println("No such search available!");
 		    return;
 		}
 	    }
 	}
-	z.solveDFS();
     }
      
    /**mutator for the animate variable  **/
@@ -234,15 +247,18 @@ public class BetterMaze{
 	}
     }
 
-    public void answerVis(Node m){
+    public boolean answerVis(Node m){
 	maze[startRow][startCol] = '@';
-	do{
+	while(m.hasLast()){
 	    Node k = m.getLast();
 	    int row = m.row();
 	    int col = m.col();
 	    maze[row][col] = '@';
 	    m = k;
-	}while (m.hasLast());
+	}
+	System.out.println(this);
+	solved = true;
+	return true;
     }
 
 
