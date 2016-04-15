@@ -61,11 +61,14 @@ public class BetterMaze{
      **/
     
     public int[] solutionCoordinates(){
+	if(last == null){
+	    return null;
+	}
 	Frontier<Integer> holder = new FrontierStack<Integer>();
 	Node k = last;
 	holder.add(last.col());
 	holder.add(last.row());
-	int i = 2;
+	int i = 0;
 	while (k.hasLast()){
 	    Node m = k.getLast();
 	    int row = m.row();
@@ -76,9 +79,7 @@ public class BetterMaze{
 	    i+=2;
 	}
 	int[] ans = new int[i];
-	ans[0] = startRow;
-	ans[1] = startCol;
-	for(i = 2; i<ans.length; i++){
+	for(i = 0; i<ans.length; i++){
 	    ans[i] = holder.next();
 	}
 	solution = ans;
@@ -199,6 +200,14 @@ public class BetterMaze{
 		}
 	    }
 	}
+	z.printArray(z.solutionCoordinates());
+    }
+
+    public void printArray(int[]args){
+	for(int i =0; i<args.length; i++){
+	    System.out.print(args[i] + " ");
+	}
+	System.out.println();
     }
      
    /**mutator for the animate variable  **/
