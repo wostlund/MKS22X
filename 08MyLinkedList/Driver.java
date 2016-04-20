@@ -45,7 +45,7 @@ public class Driver{
         System.out.println(n);
 
         //test removing from head/tail/middle
-        m.remove(0);
+        //m.remove(0);
         n.remove(0);
         System.out.println(m.toString());
 

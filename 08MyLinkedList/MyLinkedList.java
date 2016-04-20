@@ -69,6 +69,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     private LNode start, end;
     private int size;
 
+
     //public MyLinkedList(){
     //	start = null;
     //	size = 0;
@@ -90,19 +91,12 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    throw new IndexOutOfBoundsException("Your index don't work too good");
 	}
 	LNode last = start;
-	if(index < size/2){
-	    for(int i = 0; i < index; i++){
-		last = last.getNext();
-	    }
-	}else{ 
-	    last = end;
-	    for(int i = size - 1; i > index - 1; i--){
-		last = last.getLast();
-	    }
+	for(int i = 0; i < index; i++){
+	    last = last.getNext();
 	}
 	return last.getValue();
     }
-
+    
     public T set(int index, T newValue){
 	if(index < 0 || index > size - 1){
 	    throw new IndexOutOfBoundsException("Your index don't work too good");
@@ -118,13 +112,15 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public boolean add(int index, T newValue){
 	if(index < 0 || index > size){
-	    throw new IndexOutOfBoundsException("Your index don't work too good");
+	    throw new IndexOutOfBoundsException();
 	}
 	LNode a = new LNode(newValue);
-	if(index < 0 || index > size){
-	    return false;
-	}else if(index == 0){
+	if(index == size){
+	    return add(newValue);
+	}
+	if(index == 0){
 	    a.setNext(start);
+	    start.setLast(a);
 	    this.start = a;
 	    this.size ++;
 	    return true;
@@ -146,7 +142,17 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     public boolean add(T newValue){
-	return this.add(size, newValue);
+	if(end == null){
+	    start = new LNode(newValue);
+	    end = start;
+	    size++;
+	    return true;
+	}
+	end.setNext(new LNode(newValue));
+	end.getNext().setLast(end);
+	end = end.getNext();
+	size++;
+	return true;
     }
 
     public int indexOf(T value){
@@ -179,10 +185,11 @@ public class MyLinkedList<T> implements Iterable<T>{
 	LNode before = null;
 	LNode current = start;
 	if(index == 0){
-	    T m = start.getValue();
+	    s = start.getValue();
 	    start = start.getNext();
 	    start.setLast(null);
-	    return m;
+	    size--;
+	    return s;
 	}
 	while(k != index){
 	    if(k == index - 1){
