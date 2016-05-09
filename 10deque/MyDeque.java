@@ -13,44 +13,43 @@ public class MyDeque<T>{
     }
 
     private void resize(){
+	int k = 0;
+	int c = size;
 	T[] ans = (T[])new Object[data.length * 2];
-	int k = index;
-	int i;
-	for(i = 0; i < data.length; i++){
-	    if(k >= data.length){
-		k = 0;
-	    }
-	    ans[i] = data[k];
+	for(int i = data.length*2 - 1; size != 0 ; i--){
+	    ans[i] = this.removeLast();
 	    k++;
 	}
+	index = 0;
+	size = c;
 	data = ans;
-	index = i;
-   }
+    }
 
     public void addFirst(T value){
 	//System.out.println(size+":"+data.length+":"+index);
 	if(size == data.length){
-	    resize();
+	    this.resize();
 	}
 	int l = index;
-	if(index - size < 0){
-	    l = data.length + (index - size);
+	if(index - size - 1 < 0){
+	    l = data.length + (index - size - 1);
 	}else{
-	    l = index - size;
+	    l = index - size - 1;
 	}
 	size++;
 	data[l] = value;
     }
 
     public void addLast(T value){
-	if(size == data.length){
-	    resize();
+	if(size == data.length-1){
+	    this.resize();
 	}
 	if(index == data.length){
 	    index = 0;
 	}
-	size--;
+	size++;
 	data[index] = value;
+	index++;
     }
 
     public T removeFirst(){
@@ -85,12 +84,25 @@ public class MyDeque<T>{
 
     public T getLast(){
 	int l = index;
-	if(index - size < 0){
-	    l = data.length + (index - size);
-	}else{
-	    l = index - size;
+	if(l == 0){
+	    return data[data.length - 1]; 
 	}
-	return data[l];
+	return data[l - 1];
     }
 
+    public String toString(){
+	String ans = "";
+	while( size!=0){
+	    ans  += " " + this.removeFirst();
+	}
+	return ans;
+    }
+
+    public static void main(String[]args){
+	MyDeque<Integer> mike = new MyDeque<Integer>();
+	for(int i = 0; i < 25; i++){
+	    mike.addFirst(i);
+	}
+	System.out.println(mike);
+    }
 }

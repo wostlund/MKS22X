@@ -28,7 +28,7 @@ public class Driver {
             ad.addFirst(r1);
         }
        
-        for (int i = 0; i < limit/2; i++) {
+        for (int i = limit; i < limit/2; i++) {
             Integer r2 = (int) (Math.random() * 1000000);
             // Add last
             d.addLast(r2);
@@ -47,18 +47,18 @@ public class Driver {
                 System.out.println("Test #1 (addLast) failed at: " + i + "!");
                 System.exit(0);
             }
- 	    int l = d.removeLast();
-	    int m = ad.removeLast();
+ 	    int l = d.removeFirst();
+	    int m = ad.removeFirst();
             if (l!=m) {
-                System.out.println("Test #2 (removeFirst) failed at: " + i + "!");
-		System.out.println(l+" "+m);
-                System.exit(0);
+	    System.out.println("Test #2 (removeFirst) failed at: " + i + "!");
+	    	
+	      System.exit(0);
             }
 	    int k = d.removeLast();
 	    int j = ad.removeLast();
             if (k!=j) {
                 System.out.println("Test #3 (removeLast) failed at: " + i + "!");
-		System.out.println(k+" "+j);
+		
                 System.exit(0);
             }
         }

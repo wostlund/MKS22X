@@ -10,9 +10,13 @@ public class BSTree<T extends Comparable<T>>{
 	    data = value;
 	    
 	}
+
+	public void setValue(T b){
+	    data = b;
+	}
 	
 	public boolean hasChildren(){
-	    return !(left != null && right != null);
+	    return (left != null && right != null);
 	}
 
 	public T getValue(){
@@ -41,7 +45,6 @@ public class BSTree<T extends Comparable<T>>{
     }
 
     private Node root;
-
 
     //OUTER methods here are wrapper methods for the root
     public int getHeight(){
@@ -109,6 +112,60 @@ public class BSTree<T extends Comparable<T>>{
 	return contains(value, current.getLeft()) || contains(value, current.getRight());
     }
 
+    private Node remH(T value){
+        return remH(value, root);
+    }
+
+    private Node remH(T value, Node current){
+	if (current == null){
+	    return null;
+	}
+	else if(current.getValue().compareTo(value) == 0){
+	    return current;
+	}
+	if(remH(value, current.getLeft()) == null){
+	    return remH(value,current.getRight());
+	}
+	return remH(value, current.getLeft());
+    }
+
+    public T remove(T value){
+	return remove(value, root);
+    }
+
+    private T remove(T value, Node current){
+	if(current == null){
+	    return null;
+	}
+	if(!current.hasChildren()){
+	    T k = current.getValue();
+	    current = null;
+	    return k;
+	}
+	boolean n = false;
+	Node j = current;
+	T ans = current.getValue();
+	System.out.println(j.hasChildren());
+	if(n){
+	    while(j.getRight()!= null ){
+		j = j.getRight();
+		System.out.println(j.getValue());
+	    }
+	    current.setValue(j.getValue());
+	    remove(value, j);
+	    System.out.println(j.getValue());
+	    return ans;
+	}
+	while(j.getLeft()!= null){
+	    j = j.getLeft();
+	    System.out.println(j.getValue());
+	}
+	current.setValue(j.getValue());
+	remove(value, j);
+	System.out.println(j.getValue());
+	return ans;
+    }
+
     public static void main(String[]args){
 	BSTree<Integer> mark = new BSTree<Integer>();
         mark.add(new Integer(8));
@@ -118,6 +175,7 @@ public class BSTree<T extends Comparable<T>>{
 	mark.add(new Integer(6));
 	mark.add(new Integer(4));
 	System.out.println(mark);
-	System.out.println(mark.getHeight());
+	System.out.println(mark.remove(9));
+	System.out.println(mark);
     }
 }
