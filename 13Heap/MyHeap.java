@@ -4,6 +4,7 @@ public class MyHeap<T extends Comparable<T>>
 {
     private int size;
     private T[] data;
+    private boolean isMax;
     
     public MyHeap(){
 	int size = 0;
@@ -97,8 +98,15 @@ public class MyHeap<T extends Comparable<T>>
     }
 	
     //do this last
-    public MyHeap(boolean isMax){}
-    public MyHeap(T[] array, boolean isMax){}
+    public MyHeap(boolean isMax){
+	this();
+	isMax = true;
+    }
+    public MyHeap(T[] array, boolean isMax){
+	this(array);
+	this.heapify();
+	isMax = true;
+    }
 
     public static void main(String[]args){
 	MyHeap<Integer> mike = new MyHeap<Integer>();
