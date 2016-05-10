@@ -30,29 +30,54 @@ public class MyHeap<T extends Comparable<T>>
     }
     
     private void pushDown(int k){
-	if(k*2 < size && data[k].compareTo(data[k*2]) > 0  &&
-	   data[k].compareTo(data[2*k+1]) > 0){
+	if(data[2*k] == null && data[2*k+1] == null){
 	    return;
 	}
-	int lowerIndex = k*2;
-	if(data[k*2].compareTo(data[k*2+1]) < 0){
-	    lowerIndex++;
+	if(isMax){
+	    if((data[2*k + 1]== null || data[k].compareTo(data[2*k+1]) >= 0) &&
+	       data[k].compareTo(data[2*k+1]) >= 0){
+		return;
+	    }
+	    int index = 2 * k;
+	    if(data[2*k + 1] != null && data[2*k + 1].compareTo(data[2*k]) >= 0){
+		index++;
+	    }
+	    swap(data, k, index);
+	    pushDown(index);
+	}else{
+	    if((data[2*k + 1]== null || data[k].compareTo(data[2*k+1]) <= 0) &&
+	       data[k].compareTo(data[2*k]) <=0){
+		return;
+	    }
+	    int index = 2 * k;
+	    if(data[2*k + 1] != null && data[2*k + 1].compareTo(data[2*k]) <= 0){
+		index++;
+	    }
+	    swap(data, k, index);
+	    pushDown(index);
 	}
-	swap(data, k, lowerIndex);
-	pushDown(lowerIndex);
     }
 
     private void pushUp(int k){
-	if(k==1 || data[k].compareTo(data[k/2]) <= 0){
-	    return;
+	if(isMax){
+	    if(k==1 || data[k].compareTo(data[k/2]) <= 0){
+		return;
+	    }
+	    int higherIndex = k/2;
+	    swap(data, k, higherIndex);
+	    pushUp(higherIndex);
+	}else{
+	    if(k==1 || data[k].compareTo(data[k/2]) >= 0){
+		return;
+	    }
+	    int higherIndex = k/2;
+	    swap(data, k, higherIndex);
+	    pushUp(higherIndex);
 	}
-	int higherIndex = k/2;
-	swap(data, k, higherIndex);
-	pushUp(higherIndex);
     }
 
     private void heapify(){
-	for(int i = 2; i < size + 1; i++){
+	for(int i = size; i > 0; i--){
 	    pushUp(i);
 	}
     }
@@ -100,16 +125,16 @@ public class MyHeap<T extends Comparable<T>>
     //do this last
     public MyHeap(boolean isMax){
 	this();
-	isMax = true;
+	this.isMax = isMax;
     }
     public MyHeap(T[] array, boolean isMax){
 	this(array);
-	this.heapify();
-	isMax = true;
+	this.isMax = isMax;
+	
     }
 
     public static void main(String[]args){
-	MyHeap<Integer> mike = new MyHeap<Integer>();
+	MyHeap<Integer> mike = new MyHeap<Integer>(true);
 	mike.add(new Integer(3));	
 	mike.add(new Integer(32));	
 	mike.add(new Integer(4253));	
