@@ -27,7 +27,7 @@ public class MyHeap<T extends Comparable<T>>
 	return this.size;
     }
 
-    public void swap(T[] arr, int ind1, int ind2){
+    private void swap(T[] arr, int ind1, int ind2){
 	T k = arr[ind1];
 	arr[ind1] = arr[ind2];
 	arr[ind2] = k;
@@ -93,12 +93,9 @@ public class MyHeap<T extends Comparable<T>>
 	    throw new NoSuchElementException();
 	}
 	T k = data[1];
-	T[] m = (T[])(new Comparable[data.length]);
-	for(int i = 2; i<size + 1; i++){
-	    m[i-1] = data[i];
-	}
-	data = m;
-	this.heapify();
+	data[1] = null;
+	swap(data, 1, size);
+	this.pushDown(1);
 	size--;
 	return k;
     }
