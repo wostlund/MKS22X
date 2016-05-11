@@ -93,11 +93,10 @@ public class MyHeap<T extends Comparable<T>>
 	    throw new NoSuchElementException();
 	}
 	T k = data[1];
-	T[] m = (T[])(new Comparable[data.length]);
-	for(int i = 2; i<size + 1; i++){
-	    m[i-1] = data[i];
+	data[1] = null;
+	for(int i = 1; i < size + 1; i++){
+	    swap(data, i, i+1);
 	}
-	data = m;
 	this.heapify();
 	size--;
 	return k;
